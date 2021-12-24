@@ -6,3 +6,5 @@ Use by setting verbose=0 and adding callback to callbacks list in model fit, suc
 model.fit(..., callbacks=[learning_curve('loss'), ..., ], verbose=0)
 
 when initializing, select which metric to track in learning curve (i.e. 'loss', 'val_loss', etc)
+
+view example file for simple application on sklearn iris dataset
