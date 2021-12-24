@@ -1,3 +1,5 @@
+from IPython.display import clear_output
+import matplotlib.pyplot as plt
 class learning_curve(tf.keras.callbacks.Callback):
     def __init__(self, track_metric='loss'):
         self.track_metric = track_metric
@@ -10,5 +12,5 @@ class learning_curve(tf.keras.callbacks.Callback):
         plt.plot(self.epochs, self.losses)
         plt.title('Learning Curve')
         plt.xlabel('Epoch')
-        plt.ylabel('Loss')
+        plt.ylabel(self.track_metric)
         plt.show()
