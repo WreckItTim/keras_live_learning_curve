@@ -3,6 +3,6 @@ Simple callback to add to keras model that outputs live updated learning curve!
 Better than verbose text output in my opinion, just copy and paste code.
 
 Use by setting verbose=0 and adding callback to callbacks list in model fit, such as:
-model.fit(callbacks=[learning_curve('loss'), ..., ], verbose=0)
+model.fit(..., callbacks=[learning_curve('loss'), ..., ], verbose=0)
 
 when initializing, select which metric to track in learning curve (i.e. 'loss', 'val_loss', etc)
