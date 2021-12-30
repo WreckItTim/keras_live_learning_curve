@@ -5,7 +5,7 @@ Better than verbose text output in my opinion, just copy and paste code.
 
 Use by setting verbose=0 and adding callback to callbacks list in model fit, such as:
 
-model.fit(..., callbacks=[learning_curve(['loss', 'val_loss']), ..., ], verbose=0)
+model.fit(..., callbacks=[learning_curve(track_metrics=['loss', 'val_loss']), ..., ], verbose=0)
 
 
 when initializing, select which metrics to track in learning curve (i.e. 'loss', 'val_loss', etc)
