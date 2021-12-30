@@ -5,18 +5,20 @@ from sklearn.preprocessing import OneHotEncoder
 from IPython.display import clear_output
 import matplotlib.pyplot as plt
 class learning_curve(tf.keras.callbacks.Callback):
-    def __init__(self, track_metric='loss'):
-        self.track_metric = track_metric
+    def __init__(self, track_metrics=['loss'], ylabel='Metric'):
         self.epochs = []
-        self.losses = []
+        self.metrics = {metric:[] for metric in track_metrics}
+        self.ylabel = ylabel
     def on_epoch_end(self, epoch, logs=None):
         clear_output(wait=True)
         self.epochs.append(len(self.epochs))
-        self.losses.append(logs.get(self.track_metric))
-        plt.plot(self.epochs, self.losses)
+        for metric in self.metrics:
+            self.metrics[metric].append(logs.get(metric))
+            plt.plot(self.epochs, self.metrics[metric], label=metric)
         plt.title('Learning Curve')
         plt.xlabel('Epoch')
-        plt.ylabel(self.track_metric)
+        plt.ylabel(self.ylabel)
+        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         plt.show()
 
 # load iris toy dataset
@@ -32,6 +34,6 @@ model.add(tf.keras.layers.Dense(3))
 model.compile(loss='mean_squared_error', optimizer='adam')
 history = model.fit(X, Y,
                     epochs=100,
-                    callbacks=[learning_curve('loss')], 
+                    callbacks=[learning_curve(track_metrics=['loss'])], 
                     verbose=0,
                    )
